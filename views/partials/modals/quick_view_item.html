@@ -1,0 +1,34 @@
+<div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-4">
+                <a href="#" class="thumbnail imgSellPointThumbnail">
+                    <img ng-src="{{theItem.src}}"
+                         class="img-responsive imgSellPoint"/>
+                </a>
+            </div>
+
+            <div class="col-lg-8">
+                <h4>{{theItem.caption}}</h4>
+
+                <p>Price: {{theItem.price}}$</p>
+
+                <p>Details: {{theItem.details}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div class="row">
+            <button class="btn btn-default"
+                    ng-click="cancel()"
+                    ng-disabled="isLoading || universalDisable">Close
+            </button>
+            <button class="btn btn-default"
+                    ng-click="addThisToCart(); ok()"
+                    ng-disabled="isLoading || universalDisable">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+</div>

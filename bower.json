@@ -1,0 +1,25 @@
+{
+  "name": "Color",
+  "version": "2.0.0",
+  "authors": [
+    "Jovin Mwilanga <jovinbeda@hotmail.com>"
+  ],
+  "description": "A color choosing game",
+  "keywords": [
+    "color",
+    "DLP"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "toastr": "~2.1.0",
+    "angular-moment": "~0.9.2",
+    "ngFx": "~1.1.0"
+  }
+}
