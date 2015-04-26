@@ -155,6 +155,8 @@ angular.module('colorApp')
             //===============the sliders
 
             $scope.myPoints = 0;
+            $scope.checkInterval = 100;
+            $scope.level = 1;
 
             function rgbToHex(r, g, b) {
                 return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
@@ -171,9 +173,6 @@ angular.module('colorApp')
                 $scope.color_block.green = Math.floor(Math.random() * 255) + 1;
                 $scope.color_block.blue = Math.floor(Math.random() * 255) + 1;
             }
-
-            $scope.checkInterval = 100;
-            $scope.level = 1;
 
             $scope.checkMatch = function () {
                 var errors = 0;
@@ -194,18 +193,16 @@ angular.module('colorApp')
                 } else {
                     $scope.showToast('success', 'Nailed it!');
                     $scope.myPoints++;
-
-                    if ($scope.points > 15) {
+                    if ($scope.myPoints > 14) {
                         $scope.checkInterval = 10;
                         $scope.level++;
-                    } else if ($scope.points > 10) {
+                    } else if ($scope.myPoints > 9) {
                         $scope.checkInterval = 25;
                         $scope.level++;
-                    } else if ($scope.points > 5) {
+                    } else if ($scope.myPoints > 4) {
                         $scope.checkInterval = 50;
                         $scope.level++;
                     }
-
                     changeHexValue();
                     prepareNewColorBlock()
                 }
