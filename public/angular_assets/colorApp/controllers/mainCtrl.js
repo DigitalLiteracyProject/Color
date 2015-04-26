@@ -172,18 +172,20 @@ angular.module('colorApp')
                 $scope.color_block.blue = Math.floor(Math.random() * 255) + 1;
             }
 
+            $scope.checkInterval = 100;
+            $scope.level = 1;
 
             $scope.checkMatch = function () {
                 var errors = 0;
-                if (($scope.color_block.red < $scope.colorpicker.red - 100) || ($scope.color_block.red > $scope.colorpicker.red + 100)) {
+                if (($scope.color_block.red < $scope.colorpicker.red - $scope.checkInterval) || ($scope.color_block.red > $scope.colorpicker.red + $scope.checkInterval)) {
                     errors++;
                 }
 
-                if (($scope.color_block.green < $scope.colorpicker.green - 100) || ($scope.color_block.green > $scope.colorpicker.green + 100)) {
+                if (($scope.color_block.green < $scope.colorpicker.green - $scope.checkInterval) || ($scope.color_block.green > $scope.colorpicker.green + $scope.checkInterval)) {
                     errors++;
                 }
 
-                if (($scope.color_block.blue < $scope.colorpicker.blue - 100) || ($scope.color_block.blue > $scope.colorpicker.blue + 100)) {
+                if (($scope.color_block.blue < $scope.colorpicker.blue - $scope.checkInterval) || ($scope.color_block.blue > $scope.colorpicker.blue + $scope.checkInterval)) {
                     errors++;
                 }
 
@@ -193,6 +195,18 @@ angular.module('colorApp')
                 } else {
                     $scope.showToast('success', 'Nailed it!');
                     $scope.myPoints++;
+
+                    if ($scope.checkInterval > 15) {
+                        $scope.checkInterval = 10;
+                        $scope.level++;
+                    } else if ($scope.checkInterval > 10) {
+                        $scope.checkInterval = 25;
+                        $scope.level++;
+                    } else if ($scope.checkInterval > 5) {
+                        $scope.checkInterval = 50;
+                        $scope.level++;
+                    }
+
                     changeHexValue();
                     prepareNewColorBlock()
                 }
