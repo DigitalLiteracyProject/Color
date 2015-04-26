@@ -191,18 +191,17 @@ angular.module('colorApp')
 
                 if (errors > 0) {
                     $scope.showToast('warning', 'Hmm, not quite right, please try again');
-                    console.log(rgbToHex($scope.color_block.red, $scope.color_block.green, $scope.color_block.blue));
                 } else {
                     $scope.showToast('success', 'Nailed it!');
                     $scope.myPoints++;
 
-                    if ($scope.checkInterval > 15) {
+                    if ($scope.points > 15) {
                         $scope.checkInterval = 10;
                         $scope.level++;
-                    } else if ($scope.checkInterval > 10) {
+                    } else if ($scope.points > 10) {
                         $scope.checkInterval = 25;
                         $scope.level++;
-                    } else if ($scope.checkInterval > 5) {
+                    } else if ($scope.points > 5) {
                         $scope.checkInterval = 50;
                         $scope.level++;
                     }
