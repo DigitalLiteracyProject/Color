@@ -179,6 +179,23 @@ angular.module('indexApp')
                     });
             };
 
+            $scope.guestLogin = function () {
+                var credentials = {
+                    username: "Guest",
+                    password: "haha1995"
+                };
+
+                socketService.localUserLogin(credentials)
+                    .success(function (resp) {
+                        //the responseStatusHandler handles all basic response stuff including redirecting the user if a success is picked
+                        $scope.responseStatusHandler(resp);
+                    })
+                    .error(function (errResponse) {
+                        $scope.loginFormModel.password = "";
+                        $scope.responseStatusHandler(errResponse);
+                    });
+            };
+
             //===============END OF LOCAL LOGIN FORM FUNCTIONS===============
 
             //===============REGISTRATION FORM===============
