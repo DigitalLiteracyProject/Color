@@ -193,16 +193,55 @@ angular.module('colorApp')
                 } else {
                     $scope.showToast('success', 'Nailed it!');
                     $scope.myPoints++;
-                    if ($scope.myPoints > 14) {
-                        $scope.checkInterval = 10;
-                        $scope.level++;
-                    } else if ($scope.myPoints > 9) {
-                        $scope.checkInterval = 25;
-                        $scope.level++;
-                    } else if ($scope.myPoints > 4) {
-                        $scope.checkInterval = 50;
-                        $scope.level++;
+
+                    if ($scope.myPoints >= 0 && $scope.myPoints <= 4) {
+                        if ($scope.checkInterval != 100) {
+                            $scope.checkInterval = 100;
+                        }
                     }
+
+                    if ($scope.myPoints >= 5 && $scope.myPoints <= 9) {
+                        if ($scope.checkInterval != 50) {
+                            $scope.checkInterval = 50;
+                            $scope.level++;
+                        }
+                    }
+
+                    if ($scope.myPoints >= 10 && $scope.myPoints <= 14) {
+                        if ($scope.checkInterval != 25) {
+                            $scope.checkInterval = 25;
+                            $scope.level++;
+                        }
+                    }
+
+                    if ($scope.myPoints >= 15 && $scope.myPoints <= 19) {
+                        if ($scope.checkInterval != 10) {
+                            $scope.checkInterval = 10;
+                            $scope.level++;
+                        }
+                    }
+
+                    if ($scope.myPoints >= 20 && $scope.myPoints <= 24) {
+                        if ($scope.checkInterval != 5) {
+                            $scope.checkInterval = 5;
+                            $scope.level++;
+                        }
+                    }
+
+                    if ($scope.myPoints >= 25 && $scope.myPoints <= 29) {
+                        if ($scope.checkInterval != 2) {
+                            $scope.checkInterval = 2;
+                            $scope.level++;
+                        }
+                    }
+
+                    if ($scope.myPoints >= 30) {
+                        if ($scope.checkInterval != 0) {
+                            $scope.checkInterval = 0;
+                            $scope.level++;
+                        }
+                    }
+
                     changeHexValue();
                     prepareNewColorBlock()
                 }
