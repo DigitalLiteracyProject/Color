@@ -7,7 +7,8 @@ angular.module('colorApp', [
     'ui.router',
     'duScroll',
     'ngFx',
-    'ngAnimate'
+    'ngAnimate',
+    'ui.slider'
 ])
     .run(function ($templateCache, $http) {
         //views

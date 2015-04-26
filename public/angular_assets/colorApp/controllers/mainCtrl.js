@@ -1,6 +1,6 @@
 angular.module('colorApp')
-    .controller('MainController', ['$q', '$filter', '$log', '$interval', '$window', '$location', '$scope', '$rootScope', 'socket', 'mainService', 'socketService', 'globals', '$modal', 'logoutService',
-        function ($q, $filter, $log, $interval, $window, $location, $scope, $rootScope, socket, mainService, socketService, globals, $modal, logoutService) {
+    .controller('MainController', ['$q', '$filter', '$log', '$interval', '$window', '$location', '$scope', '$rootScope', 'socket', 'mainService', 'socketService', 'globals', '$modal', 'logoutService', 'colorpicker',
+        function ($q, $filter, $log, $interval, $window, $location, $scope, $rootScope, socket, mainService, socketService, globals, $modal, logoutService, colorpicker) {
 
             //variable to hold the registered state of the client
             $scope.clientIsRegistered = false;
@@ -152,6 +152,94 @@ angular.module('colorApp')
                 console.log("JOIN SUCCESS");
             });
 
+            //===============the sliders
+
+            $scope.myPoints = 0;
+
+            function rgbToHex(r, g, b) {
+                return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+            }
+
+            $scope.color_block = {
+                red: Math.floor(Math.random() * 255) + 1,
+                green: Math.floor(Math.random() * 255) + 1,
+                blue: Math.floor(Math.random() * 255) + 1
+            };
+
+            function prepareNewColorBlock() {
+                $scope.color_block.red = Math.floor(Math.random() * 255) + 1;
+                $scope.color_block.green = Math.floor(Math.random() * 255) + 1;
+                $scope.color_block.blue = Math.floor(Math.random() * 255) + 1;
+            }
+
+
+            $scope.checkMatch = function () {
+                var errors = 0;
+                if (($scope.color_block.red < $scope.colorpicker.red - 100) || ($scope.color_block.red > $scope.colorpicker.red + 100)) {
+                    errors++;
+                }
+
+                if (($scope.color_block.green < $scope.colorpicker.green - 100) || ($scope.color_block.green > $scope.colorpicker.green + 100)) {
+                    errors++;
+                }
+
+                if (($scope.color_block.blue < $scope.colorpicker.blue - 100) || ($scope.color_block.blue > $scope.colorpicker.blue + 100)) {
+                    errors++;
+                }
+
+                if (errors > 0) {
+                    $scope.showToast('warning', 'Hmm, not quite right, please try again');
+                    console.log(rgbToHex($scope.color_block.red, $scope.color_block.green, $scope.color_block.blue));
+                } else {
+                    $scope.showToast('success', 'Nailed it!');
+                    $scope.myPoints++;
+                    changeHexValue();
+                    prepareNewColorBlock()
+                }
+            };
+
+            function changeHexValue() {
+                $scope.colorpicker.hexValue = rgbToHex($scope.colorpicker.red, $scope.colorpicker.green, $scope.colorpicker.blue);
+            }
+
+            function refreshSwatch(ev, ui) {
+                var red = $scope.colorpicker.red,
+                    green = $scope.colorpicker.green,
+                    blue = $scope.colorpicker.blue;
+                changeHexValue();
+                colorpicker.refreshSwatch(red, green, blue);
+            }
+
+            // Slider options with event handlers
+            $scope.slider = {
+                'options': {
+                    start: function (event, ui) {
+                        $log.info('Event: Slider start - set with slider options', event);
+                    },
+                    stop: function (event, ui) {
+                        $log.info('Event: Slider stop - set with slider options', event);
+                    }
+                }
+            };
+
+            $scope.colorpicker = {
+                red: 255,
+                green: 140,
+                blue: 60,
+                hexValue: "",
+                options: {
+                    orientation: 'horizontal',
+                    min: 0,
+                    max: 255,
+                    range: 'min',
+                    change: refreshSwatch,
+                    slide: refreshSwatch
+                }
+            };
+
+            changeHexValue();
+
+            //end of sliders
 
             //===============logout functions===============
             $scope.logoutClient = function () {

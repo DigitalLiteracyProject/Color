@@ -11,6 +11,9 @@
     <!--bootstrap-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/paper/bootstrap.min.css">
 
+    <!--jquery ui-->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css">
+
     <!--animate.css-->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css"/>
 
@@ -34,6 +37,7 @@
 
     <!-- loads custom css file -->
     <link rel="stylesheet" href="/public/css/main.css">
+    <link rel="stylesheet" href="/public/css/color/slider.css">
     <link rel="stylesheet" href="/public/css/color/color.css">
 
     <title>COLOR</title>
@@ -63,6 +67,11 @@
         <!--this navbar will be collapsed on mobile-->
         <div class="collapse navbar-collapse navHeaderCollapse">
             <ul class="nav navbar-nav navbar-right ng-cloak">
+                <li>
+                    <a href="#">POINTS {{myPoints}}
+                    </a>
+                </li>
+
                 <li class="dropdown">
 
                     <a href="#"
@@ -89,16 +98,55 @@
 <div>
     <header id="top">
         <div class="container">
-            <div class="intro-text animated pulse ng-cloak">
-                <div ng-if="clientIsRegistered"
-                     class="ng-cloak">
-                    <a href="#login"
-                       du-smooth-scroll du-scrollspy
-                       ng-click="changeUserLoginState('register')"
-                       class="btn btn-xl">Start Game
-                    </a>
-                </div>
-            </div>
+            <section id="theGame">r
+                <h2 class="section-heading">Warm UP!</h2>
+
+                <h3 class="section-subheading">Use the sliders to match the color in the right color block with the
+                    color in the left</h3>
+                <table class="table color_table borderless">
+                    <tr>
+                        <td class="color_block"
+                            ng-style="{'background-color': 'rgb(' + color_block.red + ',' + color_block.green + ',' + color_block.blue + ')'}"></td>
+                        <td id="swatch" class="color_block"></td>
+                        <td>
+                            <div class="color_slider" id="red" ui-slider="colorpicker.options"
+                                 ng-model="colorpicker.red"></div>
+
+                            <div class="color_slider" id="green" ui-slider="colorpicker.options"
+                                 ng-model="colorpicker.green"></div>
+
+                            <div class="color_slider" id="blue" ui-slider="colorpicker.options"
+                                 ng-model="colorpicker.blue"></div>
+
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <strong>RED:</strong> <input class="form-control" ng-model="colorpicker.red">
+                                </div>
+                                <div class="form-group">
+                                    <strong>GREEN:</strong> <input class="form-control" ng-model="colorpicker.green">
+                                </div>
+                                <div class="form-group">
+                                    <strong>BLUE:</strong> <input class="form-control" ng-model="colorpicker.blue">
+                                </div>
+                            </form>
+
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <strong>HEX:</strong> <input class="form-control" ng-model="colorpicker.hexValue">
+                                </div>
+                            </form>
+
+                            <div class="checkButton">
+                                <a href="/color.html"
+                                   class="btn btn-xl"
+                                   ng-click="checkMatch()">Check
+                                </a>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+            </section>
         </div>
     </header>
 
@@ -232,6 +280,9 @@
 <!-- jquery -->
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
+<!--jquery-ui-->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
 <!--AngularJS SCRIPTS-->
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.8/angular.min.js"></script>
 <script type="text/javascript"
@@ -281,6 +332,7 @@
         src="/bower_components/ngFx/dist/ngFx.min.js"></script>
 
 
+<script type="text/javascript" src="/public/js/ui_slider.js"></script>
 <script type="text/javascript" src="/public/angular_assets/colorApp/colorApp.js"></script>
 <script type="text/javascript" src="/public/angular_assets/colorApp/directives.js"></script>
 <script type="text/javascript" src="/public/angular_assets/colorApp/filters.js"></script>

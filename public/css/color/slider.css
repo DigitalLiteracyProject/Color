@@ -1,0 +1,68 @@
+table.color_table {
+    height: 300px;
+}
+
+.borderless td, .borderless th {
+    border: none;
+}
+
+table td.color_block {
+    width: 200px;
+    /*background-color: #fed136;*/
+}
+
+form {
+    margin: 30px;
+}
+
+.ui-slider-tick {
+    position: absolute;
+    background-color: #aaa;
+    width: 2px;
+    height: 8px;
+    top: 16px;
+}
+
+div.color_slider {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#red .ui-slider-range {
+    background: #ef2929;
+    height: 20px;
+}
+
+#red .ui-slider-handle {
+    border-color: #ef2929;
+    height: 25px;
+}
+
+#green .ui-slider-range {
+    background: #8ae234;
+    height: 20px;
+}
+
+#green .ui-slider-handle {
+    border-color: #8ae234;
+    height: 25px;
+}
+
+#blue .ui-slider-range {
+    background: #729fcf;
+    height: 20px;
+}
+
+#blue .ui-slider-handle {
+    border-color: #729fcf;
+    height: 25px;
+}
+
+input.form-control {
+    color: #fed136;
+    text-align: center;
+}
+
+div.checkButton {
+    margin: 20px;
+}
